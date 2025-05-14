@@ -9,6 +9,21 @@
 
   Current set for zip base on miniz lib for easy zip read file.
 
+# Libretro core api:
+
+```c
+// Called to get system information
+void retro_get_system_info(struct retro_system_info *info) {
+   memset(info, 0, sizeof(*info));
+   info->library_name = "Libretro Core API Rom";
+   info->library_version = "1.0";
+   info->need_fullpath = true; // need to file path to read. 
+   info->block_extract = true; // skip extract default
+   info->valid_extensions = "zip"; // file types "rom | zip"
+}
+```
+There is docs api reference and github samples.
+
 # Guide:
 - Main Menu > 
 - load core
