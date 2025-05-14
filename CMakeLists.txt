@@ -52,7 +52,7 @@ set_target_properties(hello_world_core PROPERTIES
 
 # Set C standard
 set_property(TARGET hello_world_core PROPERTY C_STANDARD 99)
-
+# test unzip file read data size
 add_executable(miniz_unzip 
   src/miniz_unzip.c
   ${miniz_SOURCE_DIR}/miniz.c

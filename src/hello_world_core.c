@@ -114,43 +114,40 @@ void retro_set_environment(retro_environment_t cb) {
       return;
    }
 
-   static const struct retro_controller_description controllers[] = {
-      { "Nintendo DS", RETRO_DEVICE_SUBCLASS(RETRO_DEVICE_JOYPAD, 0) },
-   };
-
-   static const struct retro_controller_info ports[] = {
-      { controllers, 1 },
-      { NULL, 0 },
-   };
-
-   cb(RETRO_ENVIRONMENT_SET_CONTROLLER_INFO, (void*)ports);
-
-
-
-
+  //  static const struct retro_controller_description controllers[] = {
+  //     { "Nintendo DS", RETRO_DEVICE_SUBCLASS(RETRO_DEVICE_JOYPAD, 0) },
+  //  };
+  //  static const struct retro_controller_info ports[] = {
+  //     { controllers, 1 },
+  //     { NULL, 0 },
+  //  };
+  //  cb(RETRO_ENVIRONMENT_SET_CONTROLLER_INFO, (void*)ports);
 
    if (log_cb)
       log_cb(RETRO_LOG_INFO, "[DEBUG] retro_set_environment called (count: %d)", env_call_count);
    else
       fallback_log_format("DEBUG", "retro_set_environment called (count: %d)", env_call_count);
 
-      // bool contentless = false;
-      // environ_cb(RETRO_ENVIRONMENT_SET_SUPPORT_NO_GAME, &contentless);
-   if (!contentless_set) {
-      bool contentless = true;
-      if (environ_cb(RETRO_ENVIRONMENT_SET_SUPPORT_NO_GAME, &contentless)) {
-         contentless_set = true;
-         if (log_cb)
-            log_cb(RETRO_LOG_INFO, "[DEBUG] Content-less support enabled");
-         else
-            fallback_log("DEBUG", "Content-less support enabled");
-      } else {
-         if (log_cb)
-            log_cb(RETRO_LOG_ERROR, "[ERROR] Failed to set content-less support");
-         else
-            fallback_log("ERROR", "Failed to set content-less support");
-      }
-   }
+  // disable start core
+  bool contentless = false;
+  environ_cb(RETRO_ENVIRONMENT_SET_SUPPORT_NO_GAME, &contentless);
+
+  // enable start core
+  //  if (!contentless_set) {
+  //     bool contentless = true;
+  //     if (environ_cb(RETRO_ENVIRONMENT_SET_SUPPORT_NO_GAME, &contentless)) {
+  //        contentless_set = true;
+  //        if (log_cb)
+  //           log_cb(RETRO_LOG_INFO, "[DEBUG] Content-less support enabled");
+  //        else
+  //           fallback_log("DEBUG", "Content-less support enabled");
+  //     } else {
+  //        if (log_cb)
+  //           log_cb(RETRO_LOG_ERROR, "[ERROR] Failed to set content-less support");
+  //        else
+  //           fallback_log("ERROR", "Failed to set content-less support");
+  //     }
+  //  }
 }
 
 // Called by the frontend to set video refresh callback
@@ -185,10 +182,7 @@ void retro_set_audio_sample_batch(retro_audio_sample_batch_t cb) { (void)cb; }
 
 // Called when the core is initialized
 void retro_init(void) {
-  printf("init game\n");
-  printf("init game\n");
-  printf("init game\n");
-  printf("init game\n");
+  printf("[[init game]]\n");
    initialized = true;
    if (log_cb)
       log_cb(RETRO_LOG_INFO, "[DEBUG] Hello World core initialized");
@@ -252,7 +246,7 @@ void retro_get_system_info(struct retro_system_info *info) {
    info->library_name = "Hello World Core Rom";
    info->library_version = "1.0";
    info->need_fullpath = true;
-   info->block_extract = true; // Prevent RetroArch from extracting ZIP
+   info->block_extract = true; // this need to load with exts
    info->valid_extensions = "zip";
    if (log_cb)
       log_cb(RETRO_LOG_INFO, "[DEBUG] System info: %s v%s, need_fullpath=%d, block_extract=%d",
@@ -301,13 +295,7 @@ void retro_reset(void) {
 
 // Called to load a game
 bool retro_load_game(const struct retro_game_info *game) {
-  printf("LOADING.....");
-  printf("LOADING.....");
-  printf("LOADING.....");
-  printf("LOADING.....");
-  printf("LOADING.....");
-  printf("LOADING.....");
-  printf("LOADING.....%s", game->path);
+  printf("[[ LOADING.....%s ]]\n", game->path);
 
    if (log_cb)
       log_cb(RETRO_LOG_INFO, "[DEBUG] retro_load_game started");
@@ -428,10 +416,10 @@ void retro_run(void) {
       return;
    }
 
-   if (log_cb)
-      log_cb(RETRO_LOG_INFO, "[DEBUG] retro_run started");
-   else
-      fallback_log("DEBUG", "retro_run started");
+  //  if (log_cb)
+  //     log_cb(RETRO_LOG_INFO, "[DEBUG] retro_run started");
+  //  else
+  //     fallback_log("DEBUG", "retro_run started");
 
    clear_framebuffer();
 

@@ -9,7 +9,14 @@
 
   Current set for zip base on miniz lib for easy zip read file.
 
-# bugs:
+# Guide:
+- Main Menu > 
+- load core
+  - hello_world_core.dll
+- local content
+  - script.zip
+
+# Bugs:
   There might be crash or frezze.
 
 ## zip:
